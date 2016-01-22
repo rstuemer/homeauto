@@ -14,10 +14,10 @@ class Menu extends Model
      */
     public function parentMenu()
     {
-        return $this->belongsTo('App\Menu');
+        return $this->belongsTo('App\Menu','id','parentMenu');
     }
 
     public function childMenus(){
-        return $this->hasMany('App\Menu');
+        return $this->hasMany('App\Menu','parentMenu','id');
     }
 }

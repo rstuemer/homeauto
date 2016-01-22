@@ -16,6 +16,22 @@ use Illuminate\Http\Request;
 
 
 
+/*
+ * AUTH ROUTES
+ */
+
+
+//View::composer('includes.headernav', 'App\Composers\MenuComposer');
+
+Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
+]);
+/*
+ * AUTH ROUTES END
+ */
+
+
 Route::any('/', function()
 {
 	$tasks = Task::orderBy('created_at', 'asc')->get();
@@ -25,6 +41,13 @@ Route::any('/', function()
 	return $view;
 });
 
+Route::get('/dashboard',function(){
+	$tasks = Task::orderBy('created_at', 'asc')->get();
+	$view = view('tasks',[
+		'tasks' => $tasks
+	]);
+	return $view;
+});
 
 /**
  * Show Task Dashboard
@@ -64,3 +87,12 @@ Route::delete('/task/{id}', function ($id) {
 
 	return redirect('/');
 });
+
+
+
+Route::get('profile', [
+	'uses' => 'ProfileController@show'
+]);
+
+//Secure ROUTES
+Route::any('/', array('before' => 'auth', 'uses' => 'Auth\AuthController@getLogin'));
