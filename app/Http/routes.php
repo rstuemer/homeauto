@@ -128,7 +128,14 @@ Route::delete('/task/{id}', function ($id) {
 	return redirect('/');
 });
 
+Route::get('alarmsystem/{alarmsystem}',function($id){
+	$alarmSystem = \App\Alarmsystem::findOrFail($id);
 
+	$view = view('alarmsystem.statusWidget',[
+		'alarmsystem' => $alarmSystem
+	]);
+	return $view;
+});
 
 Route::resource('widgets', 'WidgetsController');
 Route::resource('menuWidget', 'MenuWidgetController');

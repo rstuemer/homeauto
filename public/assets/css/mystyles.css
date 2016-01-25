@@ -4,3 +4,26 @@
 .singlePage {
   background-color: #eee;
 }
+
+.largeFont{
+  font-size: 150px;
+}
+.largeIcon{
+
+  margin-left: 25%;
+}
+
+
+.status{
+  min-height: 50%;
+}
+
+
+.box-content{
+  height: 85%;
+  background:none;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 25px;
+  margin-top: 5px;
+}
