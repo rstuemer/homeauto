@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Widget;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class WidgetController extends Controller
+class WidgetsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,9 @@ class WidgetController extends Controller
      */
     public function index()
     {
-        //
+        $widgets = Widget::All();
+
+        return View("widgets.index",["widgetsList"=>$widgets,"editPath"=>"Widgets"]);
     }
 
     /**
@@ -28,6 +31,18 @@ class WidgetController extends Controller
     {
         //
     }
+
+    public function postQuickUpdate()
+    {
+        $inputs = Input::all();
+        $widget = Widget::find($inputs['pk']);
+        $widget->$inputs['name'] = $inputs['value'];
+
+        Log::info( "widgets save". $widget->id ." " .$widget->name);
+        $widget->save();
+        return "test";
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -48,7 +63,7 @@ class WidgetController extends Controller
      */
     public function show($id)
     {
-        //
+        echo "test show $id";
     }
 
     /**
@@ -59,7 +74,7 @@ class WidgetController extends Controller
      */
     public function edit($id)
     {
-        //
+        echo "test $id";
     }
 
     /**
@@ -82,6 +97,9 @@ class WidgetController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        Widget::destroy($id);
+
+
     }
 }

@@ -12,9 +12,9 @@ class Menu extends Model
     /**
      * Get the post that owns the comment.
      */
-    public function parentMenu()
+    public function parentMenuModel()
     {
-        return $this->belongsTo('App\Menu','id','parentMenu');
+        return $this->belongsTo('App\Menu','parentMenu','id');
     }
 
     public function childMenus(){

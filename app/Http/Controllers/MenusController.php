@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Menu;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 
-class MenuController extends Controller
+class MenusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +19,36 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+        $menus = Menu::All();
+        return View("menus.index",["menusList"=>$menus,"menuEditPath"=>"Menus"]);
+    }
+
+    public function listAll(){
+        $inputs = Input::all();
+        $menus = Menu::All();
+
+
+        if(isset($inputs['valueColumn']) && isset($inputs['textColumn'] ) ){
+            $returnValues = array();
+            foreach($menus as $menu){
+                $returnValues[] = array('value'=>$menu->$inputs['valueColumn'], 'text'=>$menu->$inputs['textColumn']);
+            }
+        }else{
+            $returnValues = $menus;
+        }
+        return response()->json( $returnValues );
+    }
+
+
+    public function postQuickUpdate()
+    {
+        $inputs = Input::all();
+        $menu = Menu::find($inputs['pk']);
+        $menu->$inputs['name'] = $inputs['value'];
+
+        Log::info( "menu save". $menu->id ." " .$menu->name);
+        $menu->save();
+        return "test";
     }
 
     /**
@@ -27,6 +59,7 @@ class MenuController extends Controller
     public function create()
     {
         //
+        return "create";
     }
 
     /**
@@ -37,7 +70,7 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+               return "store";
     }
 
     /**
@@ -48,7 +81,7 @@ class MenuController extends Controller
      */
     public function show($id)
     {
-        //
+        return "show";
     }
 
     /**
@@ -59,7 +92,8 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        return "edit";
     }
 
     /**
@@ -71,7 +105,7 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return "update";
     }
 
     /**

@@ -17,7 +17,7 @@ class WidgetsTableSeeder extends Seeder
         $cols = 2;
 
 
-        for($row=1;$row<=$rows;$row++)
+       /* for($row=1;$row<=$rows;$row++)
             for($col=1;$col<=$cols;$col++)
         DB::table('widgets')->insert([
             'name' => "test".$row.$col,
@@ -26,5 +26,19 @@ class WidgetsTableSeeder extends Seeder
             "sizex"=>1,
             "sizey"=>1
         ]);
+        */
+
+        DB::table('widgets')->insert([
+            'name' => 'alarmSystemStatus',
+            'title' => 'Status',
+            'dataRoute'=>'alarmSystem/status'
+            ]);
+
+        DB::table('widgets')->insert([
+            'name' => 'alarmSystemSensors',
+            'title' => 'Sensor Status',
+            'dataRoute'=>'alarmSystem/sensors/status'
+        ]);
+
     }
 }

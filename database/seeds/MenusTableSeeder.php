@@ -21,7 +21,7 @@ class MenusTableSeeder extends Seeder
             'target' => "/Einstellungen",
         ]);*/
 
-        DB::table('menu')->insert([
+      /*  DB::table('menu')->insert([
             'name' => "Schalter",
             'target' => "/Schalter",
             'parentMenu'=> 2
@@ -30,6 +30,18 @@ class MenusTableSeeder extends Seeder
         DB::table('menu')->insert([
             'name' => "Alarmanlage",
             'target' => "/Alarmanlage",
+            'parentMenu'=> 2
+        ]);*/
+
+        /*DB::table('menus')->insert([
+            'name' => "Menus",
+            'target' => "/Menus",
+            'parentMenu'=> 2
+        ]);*/
+
+        DB::table('menus')->insert([
+            'name' => "Widgets",
+            'target' => "/Widgets",
             'parentMenu'=> 2
         ]);
     }

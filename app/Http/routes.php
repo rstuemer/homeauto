@@ -32,6 +32,41 @@ Route::controllers([
  */
 
 
+$menus = \App\Menu::All();
+
+foreach ($menus as $menu) {
+
+
+	if($menu->parentMenu!=0) {
+		$parentMenu = $menu->parentMenuModel;
+		$path = $parentMenu->target . $menu->target;
+	}else{
+		$path = $menu->target;
+	}
+	if($menu->type == 'dashboard' ) {
+		Route::get($path, function () use ($menu) {
+
+			$userId = Auth::id();
+			$widgetsMenu = \App\MenuWidget::where(array('menu' => $menu->id, 'user' => $userId))->get();
+
+			$view = view('menuDashboard', [
+				'menuWidgets' => $widgetsMenu,
+				'activMenu' => $menu->id
+			]);
+			return $view;
+		});
+	}else if ($menu->type == 'singlePage'  ){
+		$target = str_replace("/","",$menu->target);
+		Route::resource($path, $target .'Controller');
+		Route::put($path."/{Menus}/quick_update",$target .'Controller@postQuickUpdate');
+		Route::get('API'.$path,$target .'Controller@listAll');
+	}
+}
+
+
+
+
+
 Route::any('/', function()
 {
 	$tasks = Task::orderBy('created_at', 'asc')->get();
@@ -41,20 +76,25 @@ Route::any('/', function()
 	return $view;
 });
 
-Route::get('/dashboard',function(){
+/**Route::get('/dashboard',function(){
+
 	$tasks = Task::orderBy('created_at', 'asc')->get();
 	$view = view('tasks',[
 		'tasks' => $tasks
 	]);
 	return $view;
 });
+ *
+ * */
 
 /**
  * Show Task Dashboard
  */
-Route::get('/task', function () {
-	$view = view('tasks');
-	echo "route /";
+Route::get('/tasks', function () {
+	$tasks = Task::orderBy('created_at', 'asc')->get();
+	$view = view('tasks',[
+		'tasks' => $tasks
+	]);
 	return $view;
 });
 /**
@@ -90,9 +130,14 @@ Route::delete('/task/{id}', function ($id) {
 
 
 
+Route::resource('widgets', 'WidgetsController');
+Route::resource('menuWidget', 'MenuWidgetController');
+
 Route::get('profile', [
 	'uses' => 'ProfileController@show'
 ]);
 
 //Secure ROUTES
 Route::any('/', array('before' => 'auth', 'uses' => 'Auth\AuthController@getLogin'));
+
+

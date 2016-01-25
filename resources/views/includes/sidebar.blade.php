@@ -11,12 +11,12 @@
                         <ul>
                             @foreach ($menu->childMenus as $child)
 
-                                <li><a class="submenu" href="{{$child->target}}"><i class="{{$child->icon}}}"></i><span class="hidden-tablet">{{$child->name}}</span></a></li>
+                                <li><a class="submenu" href="{{$menu->target . $child->target}}"><i class="{{$child->icon}}"></i><span class="hidden-tablet"> {{$child->name}}</span></a></li>
                             @endforeach
                         </ul>
                     </li>
                 @else
-                    <li><a href="{{$menu->target}}"><i class="{{$menu->icon}} icon-edit"></i><span class="hidden-tablet"> {{$menu->name}}</span></a></li>
+                    <li><a href="{{$menu->target}}"><i class="{{$menu->icon}} "></i><span class="hidden-tablet"> {{$menu->name}}</span></a></li>
                 @endif
 
 

@@ -12,10 +12,10 @@ class AlterUsersTableFirstAndLastname extends Migration
      */
     public function up()
     {
-        Schema::table('users', function($table){
-            $table->renameColumn('first_name','firstname');
-            $table->renameColumn('last_name','lastname');
-        });
+        //Schema::table('users', function($table){
+       //     $table->renameColumn('first_name','firstname');
+       //     $table->renameColumn('last_name','lastname');
+       // });
     }
 
     /**
@@ -27,10 +27,8 @@ class AlterUsersTableFirstAndLastname extends Migration
     {
 
         Schema::table('users', function($table){
-
             $table->renameColumn('firstname','first_name');
             $table->renameColumn('lastname','last_name');
-
     });
         //
     }

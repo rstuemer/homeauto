@@ -1,20 +1,21 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<meta name="csrf_token" content="{{ csrf_token() }}" />
 <title>Home Auth</title>
 
 <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet" type="text/css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <!--link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css"-->
 
-<link id="bootstrap-style" href="{{ URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+<link id="bootstrap-style" href="{{ URL::asset('assets/css/bootstrap.css')}}" rel="stylesheet">
 <link id="base-style" href="{{ URL::asset('assets/css/style.css')}}" rel="stylesheet">
 <link id="base-style-responsive" href="{{URL::asset('assets/css/style-responsive.css')}}" rel="stylesheet">
 <link href="{{ URL::asset('assets/css/bootstrap-responsive.min.css')}}" rel="stylesheet">
 <link href="{{ URL::asset('assets/css/jquery.gridster.css')}}" rel="stylesheet">
+<link href="{{ URL::asset('assets/css/mystyles.css')}}" rel="stylesheet">
 <link rel="shortcut icon" href="{{ URL::asset('assets/img/favicon.ico')}}">
-
+<link href="{{URL::asset('assets/css/bootstrap-editable.css')}}" rel="stylesheet">
 <!-- end: CSS -->
 
 

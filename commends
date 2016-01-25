@@ -6,4 +6,7 @@ php artisan db:seed
 php artisan db:seed --class=UserTableSeeder
 
 
+$ lessc --clean-css styles.less styles.min.css
+
+
 

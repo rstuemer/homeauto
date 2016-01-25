@@ -1,16 +1,12 @@
-@if (count($widgetByRow) > 0)
-        <!-- Form Error List -->
-
-        @foreach ($widgetByRow->all() as $widgetRow)
-
-            <div class="gridster">
-                <ul>
-                @foreach($widgetRow->all() as $widget)
-                    @include('widgets.widget', ['$widget' => $widget,'widgetsCount'=>count($widgetRow)])
+@if (count($menuWidgets) > 0)
+        <div class="gridster widgetContainer">
+            <ul class="widgetList">
+                @foreach ($menuWidgets as $menuWidget)
+                    @include('widgets.widget', ['widget' => $menuWidget->Widget,'menuWidget'=>$menuWidget])
                 @endforeach
-                </ul>
-            </div>
+            </ul>
+        </div>
 
-        @endforeach
-
+@else
+    WIDGETS EMPTY
 @endif

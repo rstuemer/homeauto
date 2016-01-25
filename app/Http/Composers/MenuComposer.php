@@ -24,7 +24,7 @@ class MenuComposer
      * Create a new menu composer.
      *
      * @param  MenuRepository  $menus
-     * @return void
+
      */
     public function __construct(MenuRepository $menus)
     {

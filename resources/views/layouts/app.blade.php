@@ -38,7 +38,7 @@
 
 				@yield('content')
 
-
+				@include("includes/scripts")
 
 
 
@@ -70,18 +70,11 @@
 		</p>
 
 	</footer>
+		{!! csrf_field() !!}
 
-	<script>
-		$(function() {
-			$(".gridster ul").gridster({
-				widget_margins: [10, 10],
-				widget_base_dimensions: [140, 140]
-		})});
-
-	</script>
 	<!-- start: JavaScript-->
 
-	<script src="{{ URL::asset('/assets/js/jquery-1.9.1.min.js')}}"></script>
+	<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script src="{{ URL::asset('/assets/js/jquery-migrate-1.0.0.min.js')}}"></script>
 
 	<script src="{{ URL::asset('/assets/js/jquery-ui-1.10.0.custom.min.js')}}"></script>
@@ -90,7 +83,8 @@
 
 	<script src="{{ URL::asset('/assets/js/modernizr.js')}}"></script>
 
-	<script src="{{ URL::asset('/assets/js/bootstrap.min.js')}}"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<!--script src="{{ URL::asset('/assets/js/bootstrap.min.js')}}"></script-->
 
 	<script src="{{ URL::asset('/assets/js/jquery.cookie.js')}}"></script>
 
@@ -136,7 +130,13 @@
 
 	<script src="{{ URL::asset('/assets/js/custom.js')}}"></script>
 
+		<script src="{{ URL::asset('/assets/js/bootstrap-editable.js')}}"></script>
+
+
 		<script src="{{ URL::asset('/assets/js/jquery.gridster.js')}}"></script>
+
+
+		<script src="{{ URL::asset('/assets/js/bootbox.min.js')}}"></script>
 	<!-- end: JavaScript-->
 
 </body>
