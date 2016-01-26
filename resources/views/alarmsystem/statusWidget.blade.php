@@ -12,5 +12,4 @@
         <i class="fa fa-bell-o fa-6 largeIcon"></i>
         {{$alarmsystem->securitystatus}}
     </div>
-
     @endif

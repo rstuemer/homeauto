@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Log;
 
 class MenusController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *

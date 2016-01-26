@@ -44,7 +44,7 @@ foreach ($menus as $menu) {
 		$path = $menu->target;
 	}
 	if($menu->type == 'dashboard' ) {
-		Route::get($path, function () use ($menu) {
+		Route::get($path,['middleware' => 'auth', function () use ($menu) {
 
 			$userId = Auth::id();
 			$widgetsMenu = \App\MenuWidget::where(array('menu' => $menu->id, 'user' => $userId))->get();
@@ -54,10 +54,10 @@ foreach ($menus as $menu) {
 				'activMenu' => $menu->id
 			]);
 			return $view;
-		});
+		}]);
 	}else if ($menu->type == 'singlePage'  ){
 		$target = str_replace("/","",$menu->target);
-		Route::resource($path, $target .'Controller');
+		Route::resource($path,$target .'Controller');
 		Route::put($path."/{Menus}/quick_update",$target .'Controller@postQuickUpdate');
 		Route::get('API'.$path,$target .'Controller@listAll');
 	}
@@ -76,16 +76,8 @@ Route::any('/', function()
 	return $view;
 });
 
-/**Route::get('/dashboard',function(){
 
-	$tasks = Task::orderBy('created_at', 'asc')->get();
-	$view = view('tasks',[
-		'tasks' => $tasks
-	]);
-	return $view;
-});
- *
- * */
+
 
 /**
  * Show Task Dashboard
@@ -100,7 +92,7 @@ Route::get('/tasks', function () {
 /**
  * Add New Task
  */
-Route::post('/task', function (Request $request) {
+Route::post('/task', ['middleware' => 'auth',function (Request $request) {
 	$validator = Validator::make($request->all(), [
 		'name' => 'required|max:255',
 	]);
@@ -116,7 +108,7 @@ Route::post('/task', function (Request $request) {
 	$task->save();
 
 	return redirect('/');
-});
+}]);
 
 
 /**
@@ -128,14 +120,14 @@ Route::delete('/task/{id}', function ($id) {
 	return redirect('/');
 });
 
-Route::get('alarmsystem/{alarmsystem}',function($id){
+Route::get('alarmsystem/{alarmsystem}',['middleware' => 'auth',function($id){
 	$alarmSystem = \App\Alarmsystem::findOrFail($id);
 
 	$view = view('alarmsystem.statusWidget',[
 		'alarmsystem' => $alarmSystem
 	]);
 	return $view;
-});
+}]);
 
 Route::resource('widgets', 'WidgetsController');
 Route::resource('menuWidget', 'MenuWidgetController');
